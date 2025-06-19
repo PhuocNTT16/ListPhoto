@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="PYP-hg-gLf">
     <device id="retina6_7" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -60,13 +61,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rHT-G9-PC0">
+                                <rect key="frame" x="0.0" y="118" width="430" height="746"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="List Photo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cew-MG-tYb">
                                 <rect key="frame" x="70" y="126.99999999999999" width="290" height="22.333333333333329"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SvC-fI-IYQ">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SvC-fI-IYQ">
                                 <rect key="frame" x="370" y="118" width="40" height="40"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -74,7 +79,8 @@
                                     <constraint firstAttribute="height" constant="40" id="QlD-nE-3mJ"/>
                                 </constraints>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Button" image="magnifyingglass" catalog="system"/>
                                 <buttonConfiguration key="configuration" style="plain" image="magnifyingglass" catalog="system"/>
                                 <connections>
                                     <action selector="btnSearchTouchUpInSide:" destination="PYP-hg-gLf" eventType="touchUpInside" id="aSE-Hq-NCB"/>
@@ -90,13 +96,16 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField toolTip="Không được nhập kí tự đặc biệt &amp; emoji ngoại trừ !@#$%^&amp;*():.,&lt;&gt;/\[]?." opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="search..." textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="uIy-sc-W0Q">
+                            <textField toolTip="Không được nhập kí tự đặc biệt &amp; emoji ngoại trừ !@#$%^&amp;*():.,&lt;&gt;/\[]?." opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="search..." textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uIy-sc-W0Q">
                                 <rect key="frame" x="20" y="169.33333333333334" width="390" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="s5a-Ne-AmW"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="search"/>
+                                <connections>
+                                    <action selector="handleTextChanged:" destination="PYP-hg-gLf" eventType="editingChanged" id="S1b-4L-Wxd"/>
+                                </connections>
                             </textField>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j4L-4a-LIh">
                                 <rect key="frame" x="20" y="127" width="40" height="40"/>
@@ -117,6 +126,7 @@
                             <constraint firstItem="Cew-MG-tYb" firstAttribute="top" secondItem="f3N-Ra-V0Q" secondAttribute="top" constant="9" id="2sc-py-TAz"/>
                             <constraint firstItem="SvC-fI-IYQ" firstAttribute="leading" secondItem="Cew-MG-tYb" secondAttribute="trailing" constant="10" id="3Pc-hF-fLJ"/>
                             <constraint firstItem="lMY-MF-RDb" firstAttribute="top" secondItem="Cew-MG-tYb" secondAttribute="bottom" constant="80" id="4Ye-cn-C7m"/>
+                            <constraint firstItem="rHT-G9-PC0" firstAttribute="leading" secondItem="f3N-Ra-V0Q" secondAttribute="leading" id="6m7-w2-xHy"/>
                             <constraint firstItem="488-Tl-9px" firstAttribute="width" secondItem="lMY-MF-RDb" secondAttribute="width" id="Bbo-Y7-PiR"/>
                             <constraint firstItem="f3N-Ra-V0Q" firstAttribute="bottom" secondItem="lMY-MF-RDb" secondAttribute="bottom" id="Fhj-aV-etr"/>
                             <constraint firstItem="lMY-MF-RDb" firstAttribute="trailing" secondItem="SvC-fI-IYQ" secondAttribute="trailing" id="GDk-3i-eoc"/>
@@ -124,11 +134,14 @@
                             <constraint firstItem="j4L-4a-LIh" firstAttribute="leading" secondItem="f3N-Ra-V0Q" secondAttribute="leading" constant="20" id="Nqm-FO-UYY"/>
                             <constraint firstItem="uIy-sc-W0Q" firstAttribute="leading" secondItem="j4L-4a-LIh" secondAttribute="leading" id="OFH-9s-gO3"/>
                             <constraint firstItem="488-Tl-9px" firstAttribute="centerY" secondItem="lMY-MF-RDb" secondAttribute="centerY" id="XTd-4Z-cX8"/>
+                            <constraint firstItem="f3N-Ra-V0Q" firstAttribute="trailing" secondItem="rHT-G9-PC0" secondAttribute="trailing" id="bMT-7b-bnf"/>
+                            <constraint firstItem="f3N-Ra-V0Q" firstAttribute="bottom" secondItem="rHT-G9-PC0" secondAttribute="bottom" id="cf6-EB-5s9"/>
                             <constraint firstItem="uIy-sc-W0Q" firstAttribute="trailing" secondItem="SvC-fI-IYQ" secondAttribute="trailing" id="eNs-3K-Wq8"/>
                             <constraint firstItem="f3N-Ra-V0Q" firstAttribute="trailing" secondItem="SvC-fI-IYQ" secondAttribute="trailing" constant="20" id="eWL-GW-xHZ"/>
                             <constraint firstItem="uIy-sc-W0Q" firstAttribute="top" secondItem="Cew-MG-tYb" secondAttribute="bottom" constant="20" id="fxh-yX-zt0"/>
                             <constraint firstItem="488-Tl-9px" firstAttribute="centerX" secondItem="lMY-MF-RDb" secondAttribute="centerX" id="g7V-JZ-VKB"/>
                             <constraint firstItem="SvC-fI-IYQ" firstAttribute="top" secondItem="f3N-Ra-V0Q" secondAttribute="top" id="j7f-Dc-C2F"/>
+                            <constraint firstItem="rHT-G9-PC0" firstAttribute="top" secondItem="f3N-Ra-V0Q" secondAttribute="top" id="rPx-2Z-ecD"/>
                             <constraint firstItem="Cew-MG-tYb" firstAttribute="leading" secondItem="j4L-4a-LIh" secondAttribute="trailing" constant="10" id="uLd-Ms-J90"/>
                             <constraint firstItem="j4L-4a-LIh" firstAttribute="top" secondItem="Cew-MG-tYb" secondAttribute="top" id="yae-lZ-XfY"/>
                         </constraints>
