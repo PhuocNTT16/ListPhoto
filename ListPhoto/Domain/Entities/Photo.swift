@@ -5,7 +5,7 @@
 //  Created by Phuoc's MAc on 17/6/25.
 //
 
-struct Photo: Decodable{
+struct Photo: Decodable, Equatable{
     let id: String
     let author: String
     let width: Int

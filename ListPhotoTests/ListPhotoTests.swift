@@ -1,36 +1,82 @@
-//
-//  ListPhotoTests.swift
-//  ListPhotoTests
-//
-//  Created by Phuoc's MAc on 17/6/25.
-//
+	//
+	//  ListPhotoTests.swift
+	//  ListPhotoTests
+	//
+	//  Created by Phuoc's MAc on 17/6/25.
+	//
 
 import XCTest
 @testable import ListPhoto
 
+class MockNetworkManager: NetworkManagerProtocol {
+	var shouldReturnError = false
+	var mockPhotos: [Photo] = []
+	
+	func fetchData<T>(urlString: String, completion: @escaping (Result<T, Error>) -> Void) where T : Decodable {
+		if shouldReturnError {
+			completion(.failure(NSError(domain: "MockError", code: 1, userInfo: nil)))
+		} else {
+				// Cast fake data về T
+			if let photos = mockPhotos as? T {
+				completion(.success(photos))
+			} else {
+				completion(.failure(NSError(domain: "MockDataTypeMismatch", code: 2, userInfo: nil)))
+			}
+		}
+	}
+}
+
 final class ListPhotoTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
+	
+	func testGetPhotos_Success() {
+			// Arrange
+		let mockNetwork = MockNetworkManager()
+		let expectedPhotos = [
+			Photo(id: "1", author: "Test", width: 100, height: 100, url: "https://test.com", download_url: "https://test.com")
+		]
+		mockNetwork.mockPhotos = expectedPhotos
+		
+		let repository = PhotoRepositoryImpl(networkManager: mockNetwork)
+		
+		let expectation = XCTestExpectation(description: "Photos fetched")
+		
+			// Act
+		repository.getPhotos(page: 1, limit: 10) { result in
+				// Assert
+			switch result {
+			case .success(let photos):
+				XCTAssertEqual(photos, expectedPhotos)
+			case .failure:
+				XCTFail("Expected success but got failure")
+			}
+			expectation.fulfill()
+		}
+		
+		wait(for: [expectation], timeout: 2.0)
+	}
+	
+	func testGetPhotos_Failure() {
+			// Arrange
+		let mockNetwork = MockNetworkManager()
+		mockNetwork.shouldReturnError = true
+		
+		let repository = PhotoRepositoryImpl(networkManager: mockNetwork)
+		
+		let expectation = XCTestExpectation(description: "Photos fetch failed")
+		
+			// Act
+		repository.getPhotos(page: 1, limit: 10) { result in
+				// Assert
+			switch result {
+			case .success:
+				XCTFail("Expected failure but got success")
+			case .failure(let error):
+				XCTAssertEqual((error as NSError).domain, "MockError")
+			}
+			expectation.fulfill()
+		}
+		
+		wait(for: [expectation], timeout: 2.0)
+	}
 
 }
